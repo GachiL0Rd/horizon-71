@@ -1,0 +1,9 @@
+{
+  "demo": true,
+  "description": "Вымышленные показатели для демонстрации карты оценок ответов. Не статистика жителей.",
+  "objects": [
+    {"sourceRow": 1, "appeals": 12, "answered": 10, "rated": 8, "positive": 7, "average": 4.4, "satisfaction": 88},
+    {"sourceRow": 4, "appeals": 15, "answered": 12, "rated": 10, "positive": 5, "average": 3.2, "satisfaction": 50},
+    {"sourceRow": 55, "appeals": 9, "answered": 7, "rated": 5, "positive": 1, "average": 2.2, "satisfaction": 20}
+  ]
+}

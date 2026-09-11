@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#234d3b">
+  <meta name="description" content="Объекты капитального строительства Тульской области: карта, сроки, доступность и история строительства.">
+  <title>Горизонт 71 · Карта развития Тульской области</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='12' fill='%23234d3b'/%3E%3Cpath d='M10 27V16l10-7 10 7v11h-7V19h-6v8' fill='none' stroke='white' stroke-width='3'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#results">Перейти к объектам</a>
+  <header class="header">
+    <a href="./" class="brand" aria-label="Горизонт 71 — главная"><svg class="horizon-logo" viewBox="0 0 42 42" aria-hidden="true"><rect width="42" height="42" rx="12" fill="#234d3b"/><path d="M10 23a11 11 0 0 1 22 0M8 26h26M12 31h18" fill="none" stroke="#e5d4ae" stroke-width="2.3"/></svg><span>Горизонт <span class="brand-number">71</span></span></a>
+    <span class="region">Тульская область <span>Портал строительных объектов</span></span>
+    <nav class="top-nav" aria-label="Разделы"><button class="active" data-view="objects">Объекты</button><button data-view="analytics">Аналитика</button><button id="appeals-button">Мои обращения</button><button id="about-button">О проекте</button></nav>
+    <button id="settings-button" class="icon-button" aria-label="Настройки карты" title="Настройки карты">⚙</button>
+  </header>
+  <main class="workspace">
+    <aside class="sidebar">
+      <div class="intro"><div class="eyebrow"><span class="live-dot"></span> МЕНЯЕМ ОБЛАСТЬ ВМЕСТЕ</div><h1>Места, где жизнь<br>становится лучше</h1><p>Что построено рядом с вами —<br>и что появится совсем скоро.</p></div>
+      <div class="stats"><div><strong id="stat-completed">—</strong><span>введено в работу</span></div><div><strong id="stat-total">—</strong><span>объектов в архиве</span></div><div><strong>2022–25</strong><span>годы ввода</span></div></div>
+      <div class="filters">
+        <div class="segmented" aria-label="Состав каталога"><button class="active" data-scope="completed">Введённые</button><button data-scope="all">Все объекты</button></div>
+        <label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Название, адрес или подрядчик" aria-label="Поиск объектов"><kbd>/</kbd></label>
+        <div class="select-row"><label><span class="sr-only">Муниципалитет</span><select id="district"><option value="">Все муниципалитеты</option></select></label><label><span class="sr-only">Год ввода</span><select id="year"><option value="">Все годы</option></select></label></div>
+        <div id="sector-filters" class="sector-filters" aria-label="Фильтр по отрасли"></div>
+      </div>
+      <div class="results-heading"><h2 id="result-count" aria-live="polite">Загружаем объекты…</h2><button id="reset" class="text-button">Сбросить</button></div>
+      <div id="results" class="results" tabindex="-1"></div>
+      <footer class="sidebar-footer"><span class="live-dot"></span> Данные организаторов хакатона <button id="quality-button" class="text-button">Качество ↗</button></footer>
+    </aside>
+    <section class="map-area" aria-label="Карта объектов">
+      <div id="map"></div>
+      <div id="map-empty" class="map-empty"><div class="map-placeholder-grid"></div><div class="map-welcome"><span class="large-symbol">⌖</span><div class="eyebrow">ТУЛЬСКАЯ ОБЛАСТЬ</div><h2>У каждого изменения<br>есть своё место</h2><p id="map-message">Подключите Яндекс Карты, чтобы увидеть объекты.<br>Каталог и карточки уже доступны.</p><button id="connect-map" class="primary">Подключить карту <span>↗</span></button></div><span class="placeholder-label">Карта появится после подключения API</span></div>
+      <div class="map-toolbar"><div class="map-tabs"><button class="active" data-layer="objects">⌖ Объекты</button><button data-layer="social">◫ Обеспеченность</button></div><div class="map-tools"><button id="satellite" class="floating-button" aria-label="Спутниковая подложка" aria-pressed="false" title="Спутниковая подложка">◩</button><button id="fit-map" class="floating-button" aria-label="Показать область целиком" title="Вся область">⛶</button></div></div>
+      <div id="map-summary" class="map-summary"></div>
+      <div id="map-legend" class="map-legend"><span class="legend-dot"></span> Цвет метки — отрасль объекта</div>
+      <div class="map-zoom"><button id="zoom-in" aria-label="Приблизить">+</button><button id="zoom-out" aria-label="Отдалить">−</button></div>
+      <section id="detail" class="detail" aria-label="Карточка объекта" hidden></section>
+      <section id="social-panel" class="social-panel" aria-label="Социальная обеспеченность" hidden></section>
+      <section id="analytics" class="analytics" aria-label="Аналитика архива" hidden></section>
+      <section id="feedback-panel" class="social-panel feedback-panel" aria-label="Обратная связь" hidden></section>
+    </section>
+  </main>
+  <dialog id="settings"><form method="dialog"><button class="close" aria-label="Закрыть">×</button><div class="eyebrow">ПОДКЛЮЧЕНИЕ</div><h2>Яндекс Карты</h2><p>Введите ключ JavaScript API. Он сохранится только в этом браузере.</p><label class="field">Ключ JavaScript API<input id="map-key" autocomplete="off" placeholder="Ваш ключ API"></label><p class="muted">В кабинете Яндекса разрешите HTTP Referer для адреса этого приложения. Для разработки: localhost:8080.</p><button id="save-key" class="primary" type="button">Сохранить и открыть карту</button><hr><h3>Пешая доступность</h3><p id="iso-config"></p><p class="muted">Пешая доступность: Valhalla / OpenStreetMap. Результаты сохраняются локально. Для масштабирования адрес собственного сервера задаётся через VALHALLA_URL в .env.</p><a href="https://developer.tech.yandex.ru/" target="_blank" rel="noopener noreferrer">Кабинет разработчика Яндекса ↗</a></form></dialog>
+  <dialog id="info"><form method="dialog"><button class="close" aria-label="Закрыть">×</button><div id="info-content"></div></form></dialog>
+  <dialog id="appeal-dialog" aria-labelledby="appeal-title"></dialog>
+  <div id="toast" role="status" class="toast" hidden></div>
+  <noscript>Для работы каталога включите JavaScript.</noscript>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

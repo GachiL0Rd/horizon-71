@@ -1,0 +1,20 @@
+{
+  "objects": {"source": "Архив_социальных_объектов.csv", "providedBy": "Организаторы хакатона", "asOf": null},
+  "districts": {
+    "source": "https://github.com/timurkanaz/Russia_geojson_OSM",
+    "file": "GeoJson's/Regions/CFO/Тульская область_Tula region.geojson",
+    "blob": "db3819d5bca1bdddd762bef1585d4b9131cf2697",
+    "repositoryFileUpdated": "2020-11-08",
+    "attribution": "© OpenStreetMap contributors",
+    "license": "ODbL",
+    "licenseUrl": "https://www.openstreetmap.org/copyright",
+    "caveat": "Административные территории из старого набора; не проверены на соответствие текущим муниципальным границам. Используются для демонстрации сценарного слоя."
+  },
+  "procurementCandidate": {
+    "objectSourceRow": 54,
+    "notice": "0366200035625000703",
+    "discoveredAt": "https://tendermedia.ru/lot/show/55951321",
+    "officialUrl": "https://zakupki.gov.ru/epz/order/notice/ea20/view/common-info.html?regNumber=0366200035625000703",
+    "verifiedContract": false
+  }
+}

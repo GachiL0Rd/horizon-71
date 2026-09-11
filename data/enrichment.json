@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "objects": {
+    "1": {
+      "media": [
+        {"stage": "during", "url": "https://tulapressa.ru/wp-content/uploads/2022/11/29/ea6q0v7diikar53c0lw1iifyp4-aegvv55hvjvmvgcqn5arctu2blybsbh2z1yysyowqvp3noe_7v2ish-k_-mvx1-840x520.jpg.webp", "date": "2022-11-25", "caption": "Детский сад в Заокском на этапе завершения работ. Дата публикации: 25 ноября 2022 года.", "credit": "Администрация Заокского района / Тульская пресса", "sourceUrl": "https://tulapressa.ru/2022/11/v-zaokskom-rajone-poyavitsya-detskij-sad-na-160-mest/"},
+        {"stage": "after", "url": "https://aif-s3.aif.ru/images/039/523/1397778be06cbac964878f1387fdaa5d.webp", "date": "2024-12-02", "caption": "Детский сад на Северной, 30 в публикации о возобновлении работы после пожара. Дата публикации: 2 декабря 2024 года.", "credit": "АиФ Тула — авторство указано в публикации", "sourceUrl": "https://tula.aif.ru/society/v-zaokskom-otkrylsya-detskiy-sad-posle-pozhara"}
+      ],
+      "historyNote": "Фотографии открываются с сайтов источников. Даты относятся к публикациям, точные даты съёмки не установлены. Ввод по архиву — 2022 год; фактическое открытие для детей в публикации указано в мае 2023 года. Это разные события."
+    },
+    "54": {
+      "news": [
+        {"date": "2025-04-29", "text": "Публикация о начале строительных работ.", "url": "https://ti71.ru/n151409.html", "source": "Тульские известия"},
+        {"date": "2025-10-01", "text": "Публикация о ходе строительства; приведена стоимость строительства 2,44 млрд рублей.", "url": "https://tulasmi.ru/n49116.html", "source": "ТУЛАСМИ"}
+      ],
+      "reportedCost": {"amount": 2440000000, "kind": "Стоимость строительства по публикации, не подтверждённая цена контракта ЕИС", "date": "2025-10-01", "source": "ТУЛАСМИ", "sourceUrl": "https://tulasmi.ru/n49116.html"},
+      "procurement": {"notice": "0366200035625000703", "verifiedContract": false, "url": "https://zakupki.gov.ru/epz/order/notice/ea20/view/common-info.html?regNumber=0366200035625000703"}
+    }
+  }
+}
