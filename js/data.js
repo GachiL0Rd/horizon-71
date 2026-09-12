@@ -16,11 +16,6 @@ export function filterObjects(objects, state) {
     && (!state.year || o.commissionYear === Number(state.year))
     && (!query || [o.name,o.address,o.district,o.contractor].join(' ').toLocaleLowerCase('ru').replaceAll('ё','е').includes(query)));
 }
-export function coverage(capacity, population, norm) {
-  if (![capacity,population,norm].every(Number.isFinite) || capacity < 0 || population <= 0 || norm <= 0) return null;
-  const ratio = capacity / (population * norm / 1000);
-  return {percent: Math.round(ratio*100), level: ratio < .9 ? 'low' : ratio > 1.1 ? 'high' : 'normal'};
-}
 export async function getJSON(url) {
   const res = await fetch(url, {signal:AbortSignal.timeout(25000)});
   const data = await res.json();

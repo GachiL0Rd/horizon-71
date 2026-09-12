@@ -1,35 +1,22 @@
 import {chromium} from '@playwright/test';
 import {mkdir} from 'node:fs/promises';
+
 const browser=await chromium.launch({headless:true});
-try{
- const page=await browser.newPage({viewport:{width:1440,height:960},deviceScaleFactor:1});
- const errors=[];page.on('pageerror',error=>errors.push(error.message));
- const network=[];page.on('response',response=>{if(response.status()>=400)network.push({host:new URL(response.url()).host,status:response.status()});});
- page.on('requestfailed',request=>network.push({host:new URL(request.url()).host,error:request.failure()?.errorText}));
- await page.goto('http://localhost:8080/',{waitUntil:'domcontentloaded'});
- await page.locator('.object-card').first().waitFor();
- await page.waitForFunction(()=>document.querySelector('#map-empty').hidden||document.querySelector('#map-message').textContent.startsWith('Не удалось'),null,{timeout:30000}).catch(()=>{});
- await page.waitForTimeout(3500);
- await mkdir('.local',{recursive:true});
- await page.screenshot({path:'.local/desktop.png',fullPage:true});
- console.log(JSON.stringify({title:await page.title(),cards:await page.locator('.object-card').count(),mapHidden:await page.locator('#map-empty').isHidden(),markers:await page.locator('.marker').count(),mapMessage:await page.locator('#map-message').textContent(),errors,network}));
- await page.locator('.object-card').first().click();
- await page.getByRole('tab',{name:'История',exact:true}).click();
- await page.waitForTimeout(1500);
- await page.screenshot({path:'.local/detail.png',fullPage:true});
- console.log('photo loaded:',await page.locator('.scene img').evaluate(img=>img.complete&&img.naturalWidth>0).catch(()=>false));
- await page.getByRole('tab',{name:'Доступность',exact:true}).click();
- await page.locator('[data-minutes="10"]').click();
- await page.waitForFunction(()=>document.querySelector('#iso-status')?.textContent.startsWith('Показана'),null,{timeout:25000});
- await page.waitForTimeout(800);
- await page.screenshot({path:'.local/isochrone.png',fullPage:true});
- console.log('isochrone:',await page.locator('#iso-status').textContent());
- await page.locator('[data-action="close-detail"]').click();
- await page.locator('[data-layer="social"]').click();await page.waitForTimeout(800);
- await page.screenshot({path:'.local/social.png',fullPage:true});
- console.log('live errors:',JSON.stringify(errors));
- await page.locator('[data-action="close-social"]').click();
- await page.locator('.object-card').first().click();
- await page.setViewportSize({width:390,height:844});
- await page.screenshot({path:'.local/mobile.png'});
-}finally{await browser.close();}
+try {
+  const page=await browser.newPage({viewport:{width:1440,height:960},deviceScaleFactor:1});
+  const errors=[];
+  page.on('pageerror',error=>errors.push(error.message));
+  await page.goto('http://localhost:8080/',{waitUntil:'domcontentloaded'});
+  await page.locator('.object-card').first().waitFor();
+  await page.waitForFunction(()=>document.querySelector('#map-empty').hidden||document.querySelector('#map-message').textContent.includes('Не удалось'),null,{timeout:30000}).catch(()=>{});
+  await mkdir('.local',{recursive:true});
+  await page.screenshot({path:'.local/desktop.png',fullPage:true});
+  console.log(JSON.stringify({title:await page.title(),cards:await page.locator('.object-card').count(),mapHidden:await page.locator('#map-empty').isHidden(),markers:await page.locator('.marker').count(),errors}));
+  await page.locator('.object-card').first().click();
+  await page.getByRole('button',{name:'Сообщить о проблеме',exact:true}).click();
+  console.log('appeal helper:',await page.locator('#appeal-dialog').isVisible());
+  await page.keyboard.press('Escape');
+  await page.locator('[data-layer="availability"]').click();
+  await page.screenshot({path:'.local/data-availability.png',fullPage:true});
+  console.log('data panel:',await page.locator('#availability-panel').textContent());
+} finally { await browser.close(); }

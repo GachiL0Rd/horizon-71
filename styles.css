@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&display=swap');
-@import url('feedback.css');
 .map-tools {
   display:flex;
   gap:8px
@@ -808,28 +807,6 @@ select {
   font-size:22px;
   letter-spacing:-.7px;
   margin:12px 25px 16px 0
-}
-.social-result {
-  border-radius:12px;
-  padding:18px;
-  margin:16px 0;
-  background:#eaf2e4;
-  border:1px solid #dbe9d4
-}
-.social-result.low {
-  background:#fae8e4;
-  border-color:#f0d5cc
-}
-.social-result.high {
-  background:#e7eff7;
-  border-color:#d5e2ee
-}
-.social-result strong {
-  font-size:32px;
-  display:block
-}
-.social-result span {
-  font-size:11px
 }
 .analytics {
   left:22px;

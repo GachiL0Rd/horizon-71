@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {filterObjects,coverage,escapeHTML} from '../js/data.js';
+import {filterObjects,escapeHTML} from '../js/data.js';
 const data=JSON.parse(await readFile(new URL('../data/objects.json',import.meta.url),'utf8'));
 const state={query:'',scope:'completed',sector:'',district:'',year:''};
 test('Archive completeness and usable coordinates',()=>{
@@ -20,12 +20,5 @@ test('Combined filters never promote planned or 100% ready objects to commission
 test('Search handles Cyrillic case and ё',()=>{
   assert.ok(filterObjects(data.objects,{...state,query:'ЩЕКИН'}).length>0);
   assert.equal(filterObjects(data.objects,{...state,query:'несуществующий объект 123'}).length,0);
-});
-test('Coverage validates denominator and threshold boundaries',()=>{
-  assert.equal(coverage(700,10000,100).level,'low');
-  assert.equal(coverage(900,10000,100).level,'normal');
-  assert.equal(coverage(1100,10000,100).level,'normal');
-  assert.equal(coverage(1101,10000,100).level,'high');
-  assert.equal(coverage(1,0,100),null);assert.equal(coverage(-1,10,10),null);assert.equal(coverage(1,10,NaN),null);
 });
 test('Unsafe source text is escaped before rendering',()=>{assert.equal(escapeHTML('<img onerror="x">'), '&lt;img onerror=&quot;x&quot;&gt;');});
